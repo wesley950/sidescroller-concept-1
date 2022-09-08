@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/enemy_walk.ogg-d5eb526c37596a8503ec00ef8741dd66.oggstr"
+
+[deps]
+
+source_file="res://Content/Binaries/enemy_walk.ogg"
+dest_files=[ "res://.import/enemy_walk.ogg-d5eb526c37596a8503ec00ef8741dd66.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

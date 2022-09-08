@@ -1,3 +1,4 @@
+class_name Player
 extends KinematicBody2D
 
 const GRAVITY = 150.0
@@ -9,6 +10,8 @@ onready var footstep_snd_emitter := $"Footstep Sound Emitter"
 onready var jump_snd_emitter := $"Jump Sound Emitter"
 onready var fall_snd_emitter := $"Fall Sound Emitter"
 
+onready var stomp_detector := $"Stomp Detector"
+
 var speed := Vector2(80, 100)
 
 var _velocity := Vector2()
@@ -17,6 +20,20 @@ var was_on_air := false # not is_on_floor() on the last frame
 
 func _physics_process(delta):
 	var direction = get_direction()
+	
+	if stomp_detector.is_colliding():
+		var stomped_obj = stomp_detector.get_collider()
+		if stomped_obj.has_method("handle_stomping"):
+			var directon_to_enemy = global_position.direction_to(stomped_obj.global_position)
+			var stomp_angle = rad2deg(directon_to_enemy.angle_to(Vector2.DOWN))
+			var dot_dte_vel = directon_to_enemy.dot(_velocity)
+			
+			if dot_dte_vel > 0:
+				var handled = stomped_obj.call("handle_stomping", self)
+				if handled:
+					# jump after stomping
+					direction.y = -1
+					jump_snd_emitter.play()
 	
 	var jump_interrupted := Input.is_action_just_released("jump") and _velocity.y < 0.0
 	

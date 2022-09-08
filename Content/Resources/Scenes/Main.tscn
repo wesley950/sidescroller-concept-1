@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Content/Resources/Actors/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Content/Binaries/tiles_packed.png" type="Texture" id=2]
 [ext_resource path="res://Content/Resources/Props/Diamond.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Content/Resources/Actors/Enemy.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=9]
 points = PoolVector2Array( 0, 0, 18, 0, 18, 18, 0, 18 )
@@ -39,46 +40,72 @@ show_collision = true
 format = 1
 tile_data = PoolIntArray( 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786470, 0, 0, 786471, 0, 0, 786472, 0, 0, 917525, 0, 0, 917526, 0, 0, 917527, 0, 0, 917528, 0, 0, 917536, 0, 0, 917537, 0, 0, 917538, 0, 0, 917539, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048613, 0, 0, 1048614, 0, 0, 1048615, 0, 0, 1048616, 0, 0, 1114140, 0, 0, 1179669, 0, 0, 1179670, 0, 0, 1179671, 0, 0, 1179672, 0, 0, 1179680, 0, 0, 1179681, 0, 0, 1179682, 0, 0, 1179683, 0, 0, 1310746, 0, 0, 1310747, 0, 0, 1310748, 0, 0, 1310749, 0, 0, 1310750, 0, 0, 1441812, 0, 0, 1441813, 0, 0, 1441814, 0, 0, 1441815, 0, 0, 1441825, 0, 0, 1441826, 0, 0, 1441827, 0, 0, 1441828, 0, 0, 1507354, 0, 0, 1507355, 0, 0, 1507356, 0, 0, 1507357, 0, 0, 1507358, 0, 0 )
 
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Diamond" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 297, 207 )
+
+[node name="Diamond2" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 315, 207 )
+
+[node name="Diamond3" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 333, 207 )
+
+[node name="Diamond4" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 693, 207 )
+
+[node name="Diamond5" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 711, 207 )
+
+[node name="Diamond6" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 729, 207 )
+
+[node name="Diamond7" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 639, 387 )
+
+[node name="Diamond8" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 621, 387 )
+
+[node name="Diamond11" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 639, 243 )
+
+[node name="Diamond12" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 387, 243 )
+
+[node name="Diamond9" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 405, 387 )
+
+[node name="Diamond10" parent="Props" instance=ExtResource( 3 )]
+position = Vector2( 387, 387 )
+
 [node name="Actors" type="Node2D" parent="."]
 
 [node name="Player" parent="Actors" instance=ExtResource( 1 )]
 position = Vector2( 513, 306 )
 
-[node name="Diamond" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 297, 207 )
+[node name="Enemy" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 585, 324 )
 
-[node name="Diamond2" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 315, 207 )
+[node name="Enemy2" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 387, 324 )
 
-[node name="Diamond3" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 333, 207 )
+[node name="Enemy3" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 513, 360 )
 
-[node name="Diamond4" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 693, 207 )
+[node name="Enemy4" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 513, 414 )
 
-[node name="Diamond5" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 711, 207 )
+[node name="Enemy5" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 297, 288 )
 
-[node name="Diamond6" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 729, 207 )
+[node name="Enemy6" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 729, 288 )
 
-[node name="Diamond7" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 639, 387 )
+[node name="Enemy7" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 603, 252 )
 
-[node name="Diamond8" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 621, 387 )
-
-[node name="Diamond11" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 639, 243 )
-
-[node name="Diamond12" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 387, 243 )
-
-[node name="Diamond9" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 405, 387 )
-
-[node name="Diamond10" parent="Actors" instance=ExtResource( 3 )]
-position = Vector2( 387, 387 )
+[node name="Enemy8" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 423, 252 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
