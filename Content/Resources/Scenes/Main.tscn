@@ -37,7 +37,6 @@ points = PoolVector2Array( 0, 0, 18, 0, 18, 18, 0, 18 )
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 18, 18 )
-show_collision = true
 format = 1
 tile_data = PoolIntArray( 786448, 0, 0, 786449, 0, 0, 786450, 0, 0, 786470, 0, 0, 786471, 0, 0, 786472, 0, 0, 917525, 0, 0, 917526, 0, 0, 917527, 0, 0, 917528, 0, 0, 917536, 0, 0, 917537, 0, 0, 917538, 0, 0, 917539, 0, 0, 1048592, 0, 0, 1048593, 0, 0, 1048594, 0, 0, 1048595, 0, 0, 1048613, 0, 0, 1048614, 0, 0, 1048615, 0, 0, 1048616, 0, 0, 1114140, 0, 0, 1179669, 0, 0, 1179670, 0, 0, 1179671, 0, 0, 1179672, 0, 0, 1179680, 0, 0, 1179681, 0, 0, 1179682, 0, 0, 1179683, 0, 0, 1310746, 0, 0, 1310747, 0, 0, 1310748, 0, 0, 1310749, 0, 0, 1310750, 0, 0, 1441812, 0, 0, 1441813, 0, 0, 1441814, 0, 0, 1441815, 0, 0, 1441825, 0, 0, 1441826, 0, 0, 1441827, 0, 0, 1441828, 0, 0, 1507354, 0, 0, 1507355, 0, 0, 1507356, 0, 0, 1507357, 0, 0, 1507358, 0, 0 )
 
@@ -90,6 +89,12 @@ position = Vector2( 585, 324 )
 [node name="Enemy2" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 387, 324 )
 
+[node name="Enemy9" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 432, 324 )
+
+[node name="Enemy10" parent="Actors" instance=ExtResource( 4 )]
+position = Vector2( 630, 324 )
+
 [node name="Enemy3" parent="Actors" instance=ExtResource( 4 )]
 position = Vector2( 513, 360 )
 
@@ -117,6 +122,13 @@ margin_top = 36.0
 margin_right = 76.0
 margin_bottom = 50.0
 text = "Health: %d"
+
+[node name="Points Display" type="Label" parent="CanvasLayer"]
+margin_left = 36.0
+margin_top = 54.0
+margin_right = 106.0
+margin_bottom = 68.0
+text = "Points: %d"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 300 )

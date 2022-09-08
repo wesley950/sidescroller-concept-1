@@ -28,6 +28,8 @@ _global_script_class_icons={
 
 config/name="Sidescroller Concept 1"
 run/main_scene="res://Content/Resources/Scenes/Main.tscn"
+boot_splash/image="res://Splash.png"
+boot_splash/use_filter=false
 config/icon="res://icon.png"
 
 [autoload]

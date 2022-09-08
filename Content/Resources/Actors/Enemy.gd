@@ -7,6 +7,9 @@ onready var anim_player := $"AnimationPlayer"
 onready var ground_detector_left := $"Ground Detector Left"
 onready var ground_detector_right := $"Ground Detector Right"
 
+onready var obstacle_detector_left := $"Obstacle Detector Left"
+onready var obstacle_detector_right := $"Obstacle Detector Right"
+
 onready var damage_area := $"Damage Area"
 
 onready var footstep_snd_emitter := $"Footstep Sound Emitter"
@@ -21,12 +24,19 @@ func _ready():
 	var _err = damage_area.connect("body_entered", self, "handle_cause_damage")
 
 func _physics_process(delta):
-	if not ground_detector_right.is_colliding() and not ground_detector_left.is_colliding():
+	if obstacle_detector_left.is_colliding() and obstacle_detector_right.is_colliding():
 		direction = 0
-	elif not ground_detector_right.is_colliding():
-		direction = -1
-	elif not ground_detector_left.is_colliding():
+	elif obstacle_detector_left.is_colliding():
 		direction = 1
+	elif obstacle_detector_right.is_colliding():
+		direction = -1
+	else:
+		if not ground_detector_right.is_colliding() and not ground_detector_left.is_colliding():
+			direction = 0
+		elif not ground_detector_right.is_colliding():
+			direction = -1
+		elif not ground_detector_left.is_colliding():
+			direction = 1
 	
 	$"Sprite".flip_h = direction == -1
 	

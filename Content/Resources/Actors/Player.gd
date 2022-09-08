@@ -19,9 +19,11 @@ var last_direction := Vector2()
 var was_on_air := false # not is_on_floor() on the last frame
 
 var health := 20.0
+var points := 0
 
 func _ready():
 	GlobalSignals.call_deferred("emit_signal", "player_health_changed", health)
+	GlobalSignals.call_deferred("emit_signal", "player_points_changed", points)
 
 func _physics_process(delta):
 	var direction = get_direction()
@@ -72,16 +74,20 @@ func get_direction():
 
 
 func handle_death():
-	# TODO: play animation like in jetpack joyride
 	queue_free()
 
+# TODO: refactor damage/enter system
 func handle_entering(body: CollisionObject2D):
-	return body is DiamondProp
+	if body is DiamondProp:
+		points += 1
+		GlobalSignals.emit_signal("player_points_changed", points)
+		return true
+	return false
 
 func handle_receive_damage(damager: Object):
 	var damage = damager.call("get_damage_caused")
 	var direction = damager.global_position.direction_to(global_position)
-	move_and_slide(direction * 500) # push
+	var _vel = move_and_slide(direction * 500) # push
 	health -= damage
 	GlobalSignals.emit_signal("player_health_changed", health)
 	
