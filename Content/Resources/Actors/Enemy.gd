@@ -7,6 +7,8 @@ onready var anim_player := $"AnimationPlayer"
 onready var ground_detector_left := $"Ground Detector Left"
 onready var ground_detector_right := $"Ground Detector Right"
 
+onready var damage_area := $"Damage Area"
+
 onready var footstep_snd_emitter := $"Footstep Sound Emitter"
 
 const SPEED = 50.0
@@ -14,6 +16,9 @@ const GRAVITY = 100.0
 
 var direction := 1
 var _velocity := Vector2()
+
+func _ready():
+	var _err = damage_area.connect("body_entered", self, "handle_cause_damage")
 
 func _physics_process(delta):
 	if not ground_detector_right.is_colliding() and not ground_detector_left.is_colliding():
@@ -48,3 +53,14 @@ func handle_stomping(stomper):
 	handle_death()
 	queue_free()
 	return handled
+
+func handle_cause_damage(body: Object):
+	if body.has_method("handle_receive_damage"):
+		var handled = body.call("handle_receive_damage", self)
+		if handled:
+			# play anim maybe
+			pass
+
+func get_damage_caused() -> int:
+	return randi() % 5
+

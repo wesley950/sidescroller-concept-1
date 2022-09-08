@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Content/Binaries/enemy.png" type="Texture" id=1]
 [ext_resource path="res://Content/Resources/Actors/Enemy.gd" type="Script" id=2]
@@ -74,6 +74,9 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.4 )
 }
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 11, 11 )
+
 [node name="Enemy" type="KinematicBody2D"]
 script = ExtResource( 2 )
 death_sfx = ExtResource( 4 )
@@ -105,3 +108,9 @@ anims/Walk = SubResource( 4 )
 [node name="Footstep Sound Emitter" type="AudioStreamPlayer2D" parent="."]
 volume_db = -19.367
 bus = "Enemy Walking"
+
+[node name="Damage Area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage Area"]
+position = Vector2( 0, -9 )
+shape = SubResource( 5 )

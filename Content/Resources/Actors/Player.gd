@@ -18,6 +18,9 @@ var _velocity := Vector2()
 var last_direction := Vector2()
 var was_on_air := false # not is_on_floor() on the last frame
 
+var health := 10.0
+
+
 func _physics_process(delta):
 	var direction = get_direction()
 	
@@ -25,7 +28,6 @@ func _physics_process(delta):
 		var stomped_obj = stomp_detector.get_collider()
 		if stomped_obj.has_method("handle_stomping"):
 			var directon_to_enemy = global_position.direction_to(stomped_obj.global_position)
-			var stomp_angle = rad2deg(directon_to_enemy.angle_to(Vector2.DOWN))
 			var dot_dte_vel = directon_to_enemy.dot(_velocity)
 			
 			if dot_dte_vel > 0:
@@ -67,5 +69,16 @@ func get_direction():
 	return Vector2(Input.get_axis("move_left", "move_right"), -1 if Input.is_action_just_pressed("jump") and is_on_floor() else 0)
 
 
+func handle_death():
+	# TODO: play animation like in jetpack joyride
+	queue_free()
+
 func handle_entering(body: CollisionObject2D):
 	return body is DiamondProp
+
+func handle_receive_damage(damager: Object):
+	var damage = damager.call("get_damage_caused")
+	health -= damage
+	GlobalSignals.emit_signal("player_health_change", health)
+	if health <= 0:
+		handle_death()
