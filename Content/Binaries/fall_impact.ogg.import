@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fall_impact.ogg-443b89dc3a02cfb0f1a1a28fa291196d.oggstr"
+
+[deps]
+
+source_file="res://Content/Binaries/fall_impact.ogg"
+dest_files=[ "res://.import/fall_impact.ogg-443b89dc3a02cfb0f1a1a28fa291196d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
