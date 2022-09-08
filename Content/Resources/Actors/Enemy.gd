@@ -62,5 +62,5 @@ func handle_cause_damage(body: Object):
 			pass
 
 func get_damage_caused() -> int:
-	return randi() % 5
+	return (randi() % 3) + 1
 

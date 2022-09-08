@@ -18,8 +18,10 @@ var _velocity := Vector2()
 var last_direction := Vector2()
 var was_on_air := false # not is_on_floor() on the last frame
 
-var health := 10.0
+var health := 20.0
 
+func _ready():
+	GlobalSignals.call_deferred("emit_signal", "player_health_changed", health)
 
 func _physics_process(delta):
 	var direction = get_direction()
@@ -78,7 +80,10 @@ func handle_entering(body: CollisionObject2D):
 
 func handle_receive_damage(damager: Object):
 	var damage = damager.call("get_damage_caused")
+	var direction = damager.global_position.direction_to(global_position)
+	move_and_slide(direction * 500) # push
 	health -= damage
-	GlobalSignals.emit_signal("player_health_change", health)
+	GlobalSignals.emit_signal("player_health_changed", health)
+	
 	if health <= 0:
 		handle_death()

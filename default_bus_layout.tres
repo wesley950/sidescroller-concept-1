@@ -6,6 +6,7 @@ cutoff_hz = 2341.0
 resonance = 0.59
 
 [resource]
+bus/0/mute = true
 bus/1/name = "Enemy Walking"
 bus/1/solo = false
 bus/1/mute = false
