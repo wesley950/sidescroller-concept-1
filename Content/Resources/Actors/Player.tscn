@@ -112,3 +112,14 @@ stream = ExtResource( 6 )
 position = Vector2( 0, -2 )
 enabled = true
 cast_to = Vector2( 0, 9 )
+collision_mask = 2
+
+[node name="Left Wall Detector" type="RayCast2D" parent="."]
+position = Vector2( -8, 0 )
+enabled = true
+cast_to = Vector2( -4, 0 )
+
+[node name="Right Wall Detector" type="RayCast2D" parent="."]
+position = Vector2( 8, 0 )
+enabled = true
+cast_to = Vector2( 4, 0 )

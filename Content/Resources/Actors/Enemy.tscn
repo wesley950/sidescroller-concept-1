@@ -78,6 +78,8 @@ tracks/1/keys = {
 extents = Vector2( 14, 11 )
 
 [node name="Enemy" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 2 )
 death_sfx = ExtResource( 4 )
 
@@ -94,17 +96,20 @@ shape = SubResource( 1 )
 position = Vector2( 9, -1 )
 enabled = true
 cast_to = Vector2( 0, 10 )
+collision_mask = 2
 
 [node name="Obstacle Detector Right" type="RayCast2D" parent="."]
 position = Vector2( 9, -9 )
 rotation = -1.57584
 enabled = true
 cast_to = Vector2( -0.020175, 3.99995 )
+collision_mask = 3
 
 [node name="Ground Detector Left" type="RayCast2D" parent="."]
 position = Vector2( -9, -1 )
 enabled = true
 cast_to = Vector2( 0, 10 )
+collision_mask = 2
 
 [node name="Obstacle Detector Left" type="RayCast2D" parent="."]
 position = Vector2( -9, -9 )

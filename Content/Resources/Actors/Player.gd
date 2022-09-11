@@ -2,6 +2,7 @@ class_name Player
 extends KinematicBody2D
 
 const GRAVITY = 150.0
+const GRAVITY_WALL = 15.0
 const JUMP_SPEED = 50.0
 
 onready var anim_player := $"AnimationPlayer"
@@ -11,12 +12,16 @@ onready var jump_snd_emitter := $"Jump Sound Emitter"
 onready var fall_snd_emitter := $"Fall Sound Emitter"
 
 onready var stomp_detector := $"Stomp Detector"
+onready var left_wall_detector := $"Left Wall Detector"
+onready var right_wall_detector := $"Right Wall Detector"
 
 var speed := Vector2(80, 100)
 
 var _velocity := Vector2()
 var last_direction := Vector2()
 var was_on_air := false # not is_on_floor() on the last frame
+var wall_jump_x_dir := 0
+var current_gravity := GRAVITY
 
 var health := 20.0
 var points := 0
@@ -44,16 +49,43 @@ func _physics_process(delta):
 	var jump_interrupted := Input.is_action_just_released("jump") and _velocity.y < 0.0
 	
 	if jump_interrupted:
-		_velocity.y *= 0.3
+		_velocity.y *= 0.8
 	
-	_velocity.x = direction.x * speed.x
+	if not is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			if left_wall_detector.is_colliding():
+				direction.y = -1
+				wall_jump_x_dir = 1
+			elif right_wall_detector.is_colliding():
+				direction.y = -1
+				wall_jump_x_dir = -1
+			else:
+				wall_jump_x_dir = 0
+	else:
+		wall_jump_x_dir = 0
+	
+	# in case the player wants to cancel the wall sliding
+	if direction.x != 0 and (not left_wall_detector.is_colliding() or not right_wall_detector.is_colliding()):
+		wall_jump_x_dir = direction.x
+	
+	if wall_jump_x_dir == 0:
+		_velocity.x = direction.x * speed.x
+		$"Graphics/Player".flip_h = direction.x < 0
+	else:
+		_velocity.x = wall_jump_x_dir * speed.x
+		$"Graphics/Player".flip_h = wall_jump_x_dir < 0
+		
 	if direction.y != 0: 
 		_velocity.y = direction.y * speed.y
-		
-	$"Graphics/Player".flip_h = direction.x < 0
-		
+	
 	_velocity = move_and_slide(_velocity, Vector2.UP)
-	_velocity.y += GRAVITY * delta
+	
+	if (left_wall_detector.is_colliding() or right_wall_detector.is_colliding()) and _velocity.y > 0:
+		current_gravity = GRAVITY_WALL
+	else:
+		current_gravity = GRAVITY
+		
+	_velocity.y += current_gravity * delta
 	
 	if _velocity.x != 0 and is_on_floor():
 		anim_player.play("Walk")
@@ -66,6 +98,7 @@ func _physics_process(delta):
 	if was_on_air and is_on_floor():
 		fall_snd_emitter.play()
 	
+	# always update this lastly!
 	last_direction = direction
 	was_on_air = not is_on_floor()
 
